@@ -1,0 +1,23 @@
+algoritmo
+
+var
+  N, C: real
+  C_D: inteiro
+inicio
+  escreval("Digite um número")
+    leia(N)
+    C <- 1
+  repita
+    se (N mod C = 0) entao
+      C_D <- C_D + 1
+    fimse
+    C <- C + 1
+  ate (C > N)
+  escreval(C_D)
+  se (C_D > 2) entao
+    escreval("O valor ", N, " não é primo!")
+  senao 
+    escreval("O valor ", N, " é primo!")
+  fimse
+fimalgoritmo
+ 

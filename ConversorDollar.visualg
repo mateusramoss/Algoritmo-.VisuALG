@@ -1,0 +1,14 @@
+algoritmo "Idade"
+
+var
+  Posse, Quan_Dolar: real
+inicio
+
+  escreval("Descubra quantos dólares você receberá pós conversão. ")
+  escreval(" Conversão do dollar está de 1 USD - 5,103 R$")
+  escreval("Digite o valor, em reais, que você possui: ")
+    leia(Posse)
+  Quan_Dolar <- Posse / 5.103
+  escreva("Seu valor, em dólar, é de: ", Quan_Dolar)
+
+fimalgoritmo

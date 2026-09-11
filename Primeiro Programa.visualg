@@ -1,0 +1,14 @@
+algoritmo "MédiaDosNúmeros"
+
+var
+  N1, N2: inteiro
+  M: real
+inicio
+  escreval("Programa para encontrar a média entre dois números.")
+  escreval("Digite o primeiro número: ")
+    leia(N1)
+  escreval("Digite o segundo número")
+    leia(N2)
+  M <- (N1+N2)/2
+  escreva("A média entre ", N1, " e ", N2, " é ", M)
+fimalgoritmo

@@ -1,0 +1,13 @@
+algoritmo "Primeiro Programa"
+
+var
+  Num, Mult: inteiro
+inicio
+  escreval("Digite O número que você quer saber sua tabuada: ")
+    leia(Num)
+  Mult <- 1
+  repita
+    escreval(Num, " x ", Mult, " = "Num * Mult)
+    Mult <- Mult + 1
+  ate (Mult > 10)
+fimalgoritmo

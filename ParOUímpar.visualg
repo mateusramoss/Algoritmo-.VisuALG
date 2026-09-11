@@ -1,0 +1,13 @@
+algoritmo ""
+
+var
+  numero: inteiro
+inicio
+  escreval("Quer saber se um número é ímpar? Digite-o: ")
+    leia(numero)
+  se (numero mod 2) = 0 entao
+    escreva("Seu número ", numero, " é par.")
+  senao
+    escreva("Seu número ", numero, " é ímpar.")
+  fimse
+fimalgoritmo

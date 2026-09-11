@@ -1,0 +1,52 @@
+algoritmo
+
+var
+  Sx, R: caracter
+  Ida, Cor, C_M, C_F, Ver: inteiro
+inicio
+  R <- "S"
+  Ver <- 1
+  repita
+    limpatela
+    escreval("--------------------")
+    escreval(" SELETOR DE PESSOAS ")
+    escreval("--------------------")
+    escreval("Qual o sexo? [M/F]")
+    leia(Sx)
+    escreval("Qual a idade? ")
+    leia(Ida)
+    escreval("Qual a cor do cabelo?")
+    escreval("---------------------")
+    escreval("[1] Castanho")
+    escreval("[2] Loiro")
+    escreval("[3] Preto")
+    escreval("[4] Ruivo")
+    leia(Cor)
+
+    se (Sx = "M") ou (Sx = "F") e (Cor = 1) ou (Cor = 2) ou (Cor = 3) ou (Cor = 4) entao
+
+      se (Sx = "M") e (Ida >= 18) e (Cor = 1) entao
+        C_M <- C_M + 1
+      senao
+        se (Sx = "F") e (Ida >= 25) e (Ida <= 30) e (Cor = 2) entao
+          C_F <- C_F + 1
+        fimse
+      fimse
+
+    senao
+      se (Sx <> "M" ) e (Sx <> "F") ou (Cor <> 1) e (Cor <> 2) e (Cor <> 3) e (Cor <> 4) entao
+        escrevaL("Error! Caracter inválido.")
+      fimse
+    fimse
+    escreval("Quer continuar? [S/N]")
+    leia(R)
+    limpatela
+  ate (R = "N") ou (Ver = 0)
+
+  se (R <> "S") e (R <> "N") entao
+    escreval("Error! Caracter inválido.")
+    Ver <- 0
+  senao
+    escreval("Há ", C_M, " Machos com igual ou mais de dezoito ano(s) e que têm cabelo castanho. E há ", C_F, " Fêmeas, com idade(s) entre vinte cinc e trinta anos, e têm cabelo loiro")
+  fimse
+fimalgoritmo

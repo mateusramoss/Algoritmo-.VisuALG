@@ -1,0 +1,32 @@
+algoritmo 
+
+var
+  nome, M_nome: caracter
+  Q_alunos, Num: inteiro
+  nota, M_nota: real
+inicio
+  escreval("-----------------------------")
+  escreval("    ESCOLA SAPO SONOLENTO    ")
+  escreval("-----------------------------")
+  escreval("Quantas(os) alunas(os) a turma tem?")
+    leia(Q_alunos)
+  escreval("-----------------------------")
+  M_nota <- 0
+  enquanto (Q_alunos >= 1) faca
+    Q_alunos <- Q_alunos - 1
+    Num <- Num + 1
+    escreval("Aluno ", Num)
+    escreva("Nome da(o) aluna(o): ")
+      leia(nome)
+    escreval(nome)
+    escreva("Nota de ", nome, ": ")
+      leia(nota)
+    escreval(nota)
+    escreval("-----------------------------")
+      se (nota > M_nota) entao
+        M_nota <- nota
+        M_nome <- nome
+      fimse
+  fimenquanto
+  escreval("O melhor aprovveitamento foi de ", M_nome, " com a nota de ", M_nota)
+fimalgoritmo

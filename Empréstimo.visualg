@@ -1,0 +1,18 @@
+algoritmo "Empréstimo"
+
+var
+
+  Emp_valor, Valortotal, Val_Parc: real
+  parcela: inteiro
+
+inicio
+
+  escreval("Empréstimos com juros de 20% sobre o valor. Digite o valor que você deseja: ")
+    leia(Emp_valor)
+  Valortotal <- Emp_valor + ((Emp_valor *  20) / 100)
+  escreval("Quantas vezes você quer parcelar? ")
+    leia(parcela)
+  Val_Parc <- Valortotal / parcela
+  escreval("Você irá pagar ", Valortotal, ",00 com parcelas de ", Val_Parc, ",00")
+
+fimalgoritmo

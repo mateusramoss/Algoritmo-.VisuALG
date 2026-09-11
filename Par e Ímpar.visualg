@@ -1,0 +1,20 @@
+algoritmo "Primeiro Programa"
+
+var
+
+  C, Num : inteiro
+
+inicio
+
+  escreval("Até que número você gostaria de saber quais são pares e ímpares? ")
+    leia(Num)
+  para C de 1 ate Num passo 1 faca
+
+    se (C mod 2 = 0) entao
+      escreval("O número ", C, " é Par")
+    senao
+      escreval("O número ", C, " é ímpar")
+    fimse
+
+  fimpara
+fimalgoritmo

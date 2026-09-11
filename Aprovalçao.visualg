@@ -1,0 +1,46 @@
+algoritmo
+
+var
+  N1, N2, M: real
+inicio
+  escreval("-------------------------")
+  escreval("  Escola Sapo Sonolento  ")
+  escreval("-------------------------")
+  escreval("Digite a primeira nota: ")
+    leia(N1)
+  escreval("Digite a segunda nota: ")
+  leia(N2)
+  M <- (N1 + N2) / 2
+  escreval("-------------------")
+  escreval(" A média é de ", M)
+
+  se (M < 5) entao
+    escreval(" Aproveitamento: F")
+    escreval("-------------------")
+  senao
+    se (M >= 5) e (M <= 5.9) entao
+      escreval(" Aproveitamento: E")
+      escreval("-------------------")
+      senao
+        se (M >= 6) e (M <= 6.9) entao
+          escreval(" Aproveitamento: D")
+          escreval("-------------------")
+        senao
+          se (M >= 7) e (M <= 7.9) entao
+            escreval(" Aproveitamento: C")
+            escreval("-------------------")
+          senao
+            se (M >= 8) e (M <= 8.9) entao
+              escreval(" Aproveitamento: B")
+              escreval("-------------------")
+            senao
+              se (M >= 9) e (M <= 10) entao
+                escreval(" Aproveitamento: A")
+                escreval("-------------------")
+             fimse
+            fimse
+         fimse
+      fimse
+    fimse
+  fimse
+fimalgoritmo

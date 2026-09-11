@@ -1,0 +1,36 @@
+algoritmo "Idade"
+
+var
+  AnoN, AnoAt, Idade, Opcao, Ano_hipo: inteiro
+inicio
+  escreval("Você gostaria de saber quantos anos você tem ou quantos anos você terá? digite 1 para primeira opção e 2 para a segunda. ")
+    leia(Opcao)
+  se Opcao = 1 entao
+      escreval("Digite o ano que você nasceu: ")
+       leia(AnoN)
+      escreval("Digite o ano atual: ")
+       leia(AnoAt)
+       Idade <- AnoAt - AnoN
+       escreval("Sua idade é de ", Idade, ".")
+    se Idade >= 21 entao
+      escreval("E você é maior de idade.")
+    senao 
+      escreval("E você é menor de idade.")
+    fimse 
+  fimse
+  se Opcao = 2 entao
+    escreval("Digite o ano que você nasceu")
+      leia(AnoN)
+    escreval("Digite o ano que você quer saber: ")
+      leia(Ano_hipo)
+    Idade <- Ano_hipo - AnoN
+    escreval("Você terá ", Idade)
+      se Idade >= 21 entao
+        escreval("E você será maior de idade.")
+      senao 
+        escreval("E você continuará a ser menor de idade.")
+      fimse 
+
+  fimse 
+  
+fimalgoritmo

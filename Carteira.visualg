@@ -1,0 +1,28 @@
+algoritmo 
+
+var
+ A_atual, A_nasc, Idade: inteiro
+
+inicio
+  escreval("--------------------------")
+  escreval(" DEPARTAMENTO DE TRÂNSITO")
+  escreval("--------------------------")
+
+  escreval("Digite o ano atual: ")
+    leia(A_atual)
+  escreval("Digite o ano de nascimento: ")
+    leia(A_nasc)
+  Idade <- A_atual - A_nasc
+  se Idade >= 18 entao
+    escreval("--------------- STATUS ---------------")
+    escreval("IDADE: ", Idade)
+    escreval("Você está ápto para tirar a carteira")
+     escreval("--------------------------------------")
+  senao
+    escreval("------ STATUS ------")
+    escreval("IDADE: ", Idade)
+    escreval("Inapto a tirar carteira.")
+    escreval("--------------------")
+  fimse
+
+fimalgoritmo

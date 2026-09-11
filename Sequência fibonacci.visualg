@@ -1,0 +1,16 @@
+algoritmo "Primeiro Programa"
+
+var
+  quant, C, V_V, V_N, T: inteiro
+inicio
+  escreval("Quantos números da sequência Fibonacci irá querer?")
+    leia(quant)
+  V_N <- 1
+  escreva(V_V, " ")
+  para C de 1 ate quant - 1 passo 1 faca
+    T <- V_N
+    V_N <- V_V + V_N
+    V_V <- T
+    escreva(V_N, " ")
+  fimpara 
+fimalgoritmo

@@ -1,0 +1,43 @@
+algoritmo
+
+var
+
+  G_Bangu, G_MAD, Dif_gols: inteiro
+
+inicio
+
+  escreval("    BANGU X MADUREIRA")
+  escreval("---------------------")
+  escreval("Quantos gols do BANGU? ")
+    leia(G_Bangu)
+  escreval("Quantos gols de Madureira? ")
+    leia(G_MAD)
+
+
+  se (G_Bangu > G_MAD) entao
+    Dif_gols <- (G_Bangu - G_MAD)
+  senao
+    se (G_Bangu < G_MAD) entao
+      Dif_gols <- (G_MAD - G_Bangu)
+    senao
+      Dif_gols <- 0
+    fimse
+  fimse
+
+  escolha Dif_gols
+    caso 1, 2, 3
+      escreval("---------------------")
+      escreval("DIFERENÇA: ", Dif_gols)
+      escreval("STATUS: Partida normal")
+    caso 4, 5, 6
+      escreval("---------------------")
+      escreval("DIFERENÇA: ", Dif_gols)
+      escreval("STATUS: GOLEADA!!!")
+    caso 0
+      escreval("---------------------")
+      escreval("DIFERENÇA: ", Dif_gols)
+      escreval("STATUS: EMPATE")
+  fimescolha  
+
+
+fimalgoritmo

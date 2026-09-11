@@ -1,0 +1,10 @@
+algoritmo "Idade"
+
+var
+  Temp_Fahr, C: real
+inicio
+  escreval("Qual a temperatura em Fahrenheit que você está vendo? ")
+    leia(Temp_Fahr)
+  C <- (Temp_Fahr - 32) / 1.8
+  escreval("A temperatura em Celsiu é de: ", C:4:1)
+fimalgoritmo

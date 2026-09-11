@@ -1,0 +1,36 @@
+algoritmo
+
+var
+  Num, Quant, C, T_1, T_2, R, V: inteiro
+inicio
+  escreval("Quantos números serão digitados? ")
+    leia(Quant)
+  escreval("Digite o número")
+   leia(Num)
+  T_2 <- Num
+  T_1 <- Num
+  se (Quant > 1) entao
+    para C de 2 ate Quant passo 1 faca  
+      escreval("Digite um número: ")
+        leia(Num)
+      se (Num > T_1) entao
+        T_1 <- Num
+      fimse
+      se (Num < T_2) entao
+        T_2 <- Num
+      fimse
+    fimpara
+    se (T_2 < 0) entao
+      R <- T_1 + T_2
+    senao
+      R <- T_1 - T_2
+    fimse
+    escreval("O maior número digitado é: ", T_1)
+    escreval("O menor número digitado é: ", T_2)
+    escreval("A diferença entre ", T_1, " e ", T_2, " é ", R)
+    V <- 1
+  fimse
+  se (V = 0) entao
+    escreval("Apenas um número foi digitado. Sendo esse: ", Num)
+  fimse
+fimalgoritmo

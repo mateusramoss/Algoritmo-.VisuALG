@@ -1,0 +1,24 @@
+algoritmo
+var
+  Num_Q, C, Val, C_N, S, S_imp: inteiro
+inicio
+  escreval("Quais números estão entre 0 e 10 dos digitados. ")
+  escreval("Quantos números serão digitados? ")
+    leia(Num_Q)
+  para C de 1 ate Num_Q passo 1 faca
+    escreval("Digite o número: ")
+      leia(Val)
+    se (Val > 10) e (Val mod 2 = 1) entao
+      S_imp <- S_imp + Val
+    fimse
+    se (Val >= 0) e (Val <= 10) entao
+      C_N <- C_N + 1
+      se (Val mod 2 = 1) entao
+        S <- S + Val
+      fimse
+    fimse
+  fimpara
+  escreval("Dos digitados, há ", C_N, " números entre 0 e 10")
+  escreval("A soma dos números ímpares é de ", S)
+  escreval("A soma dos números ímpares além de 0 e 10 é de: ", S_imp)
+fimalgoritmo

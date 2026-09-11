@@ -1,0 +1,33 @@
+algoritmo 
+
+var
+
+  N_somas: inteiro
+  Num, soma, Maior, Menor, Temp: real
+
+inicio
+
+  escreval("Quantos números gostaria de somar? ")
+    leia(N_somas)
+  escreval("Digite o número")
+    leia(Num)
+    Menor <- Num
+    maior <- Num
+    soma <- Num
+    enquanto (N_somas > 1) faca
+      N_somas <- N_somas - 1
+      escreval("Digite o número: ")
+        leia(Num)
+      soma <- soma + Num
+      se (Num > Maior) entao
+        Maior <- Num
+      senao
+        Menor <- Num
+      fimse
+    fimenquanto
+    
+  escreval("A soma de todos os valores é: ", soma:4:1)
+  escreval("O maior número digitado é: ", Maior)
+  escreval("E o menor é: ", Menor)
+
+fimalgoritmo

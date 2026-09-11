@@ -1,0 +1,39 @@
+algoritmo
+
+var
+
+  Quant, C, Q_Div, Val_n: inteiro
+  val, T, S, Val_p: real
+
+inicio
+//----------------------------------------------------------------
+  escreval("Quantos valores serão digitados?")
+    leia(Quant)
+//----------------------------------------------------------------
+  para C de 1 ate Quant passo 1 faca 
+    T <- S
+    escreva("Digite o valor: ")
+      leia(val)
+    escreval(val)
+      S <- T + val
+    se (val <> 0) entao  
+      se (val mod 5 = 0) entao
+        Q_Div <- Q_Div + 1
+      fimse
+    fimse
+//----------------------------------------------------------------
+    se (val = 0) entao
+      Val_n <- Val_n + 1
+    fimse
+//----------------------------------------------------------------
+    se (val mod 2 = 0) entao
+      Val_p <- Val_p + val
+    fimse
+//----------------------------------------------------------------
+  fimpara
+  escreval("A soma dos valores é de: ", S, " ")
+  escreval("A média de todos os valores digitados é: ", S/Quant)
+  escreval("Há ", Q_Div, " númer(os) divisível(eis) por cinco. Caso 0 tenha sido digitado, o mesmo foi desconsiderado. ")
+  escreval("Há ", Val_n, " valor(es) nulos. ")
+  escreval("A soma dos números digitados e pares é de: ", Val_p)
+fimalgoritmo
