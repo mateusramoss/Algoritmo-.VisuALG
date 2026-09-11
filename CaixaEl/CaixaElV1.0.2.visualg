@@ -1,5 +1,5 @@
 algoritmo 
-
+//Programa para mostrar quantas notas de maior valor e em menor quantidade é possível entregar ao ser feito o pedido de saque. E quantos saques foram feitos. Há algumas mensagens para o caso de digitarem valores inválidos.
 var
   R: caracter
   saque, C_100, C_50, C_20, C_10, C_5, C_2, V, Q_saq, T: inteiro
