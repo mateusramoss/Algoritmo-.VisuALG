@@ -1,0 +1,67 @@
+algoritmo
+
+var
+  R: caracter
+  C, Quant_alu, C_Quant, V, Aprov, Recup, Reprov, Cont_ver: inteiro
+  Nota, S, M, M_geral, S, S_media: real
+inicio
+  escreva("Quantos alunos serão catalogados? ")
+  leia(Quant_alu)
+  escreval(Quant_alu)
+  C <- 1
+  repita
+    para C_Quant de 1 ate Quant_alu passo 1 faca
+      enquanto (C <= 3) faca
+        escreva("Digite a nota: ")
+        leia(Nota)
+        escreval(Nota)
+        se (Nota >= 0) e (Nota <=10) entao
+          S <- S + Nota
+          V <- 1
+        senao
+          C <- 4
+          V <- 0
+        fimse
+        C <- C + 1
+      fimenquanto
+      //------------
+      se (V = 1) entao
+        limpatela
+        escreval("Próximo aluno: ")
+        M <- S / 3
+        S_media <- S_media + M
+        se (M >= 7) entao
+          Aprov <- Aprov + 1
+        senao
+          se (M >= 5) e (M < 7) entao
+            Recup <- Recup + 1
+          senao
+            Reprov <- Reprov + 1
+          fimse
+        fimse
+        S <- 0
+        R <- "N"
+      senao
+        escreval("VALOR INCONGRUENTE COM O PROPÓSITO DO PROGRAMA.")
+        C_Quant <- Quant_alu
+        escreval("Quer continuar?[S/N]")
+        leia(R)
+        limpatela
+        C <- 1
+        Cont_ver <- 1
+      fimse
+    fimpara
+  ate (R = "N")
+  //------------
+  se (V = 1) entao
+    M_geral <- S_media / Quant_alu
+    limpatela
+    escreval("-----------------------------------------")
+    escreval("    Foram avaliados ", Quant_alu, ", destes: ")
+    escreval("    Foram aprovados ", Aprov, " alunos. ")
+    escreval("    ", Recup, " alunos ficaram em recuperação. ")
+    escreval("    ", Reprov, " alunos foram reprovados. ")
+    escreval("    A média de todos os alunos é de ", M_geral:4:1)
+    escreval("-----------------------------------------")
+  fimse
+fimalgoritmo
