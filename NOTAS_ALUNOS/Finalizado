@@ -1,0 +1,100 @@
+algoritmo
+
+var
+  Resp: caracter
+  Cont_Est_T, Cont_Alunos, Cont, Cont_Loop, C, Aprov, Recup, Reprov, Ver_Mens: inteiro
+  nota, soma_nota, Media, Soma_Media:  real
+inicio
+  C <- 1                                                   //Define o valor da variável contadora das notas do aluno, já que sem definição, ela fica em zero, o que afeta na contagem das notas, calculando, assim, quatro notas, ao invés de três
+  Cont_Loop <- 1                                           
+  Resp <- "S"                                              // Para que o programa entre na estrutura, é necessário definir o valor inicial das variáveis que o inicia. [ Resp e Cont_Est_T ]
+  Cont_Est_T <- 1
+  enquanto (Cont_Est_T = 1) e (Resp = "S") faca            // zero desliga, ou seja, finaliza o looping, e 1 continua ---Cont_Est_T = controle de estrutura total.
+    //INICIO
+
+    escreval("Digite a quantidade de alunos")
+    leia(Cont_Alunos)
+    //---------------------------
+    se (Cont_Alunos >= 1) entao
+      //+++++++++++++++++++++++
+      para Cont de 1 ate Cont_Alunos passo 1 faca           //Contador para a quantidade de alunos.
+        escreval("Aluno ", Cont, "°: ")                     //Mostra ao usuário a relação entre as notas e a posição do aluno.
+        enquanto(C <= 3) e (Cont_Loop = 1) faca             //contador para quantidade de notas que serão inseridas. O loop continuará a rodar até que a variável seja maior que 3 e o Controlador do loop seja 1.
+          escreva("Digite a nota: ")
+          leia(nota)
+          escreval(nota)
+          //*********
+          se (nota >= 0) e (nota <=10) entao                //verifica se a nota é válida.
+            soma_nota <- soma_nota + nota                   //Recebe o valor das notas anteriores para que seja possível calcular a média do aluno.
+            Cont_Loop <- 1                                  //Caso o valor esteja fora das condições, é necessário zerar as variáveis relacionado às notas e rodar o loop de notas do início.
+            C <- C + 1                                      //Contador da estrutura das notas.
+            se (Cont > Cont_Alunos) entao
+              Cont_Loop <- 0
+            fimse
+          senao
+            soma_nota <- 0                                  //ZERA O VALOR QUALQUER QUE ESTEJA DENTRO DA VARIÁVEL, PARA QUE NÃO SOME COM OS VALORES ANTERIORES AO ERRO CASO TENHA SIDO
+            C <- 1                                          //DIGITADO UM VALOR NÃO PERMITIDO E EM SEGUIDA UM PERMITIDO. O "C" É ZERADO PARA COMEÇAR A RECONTAR O NÚMERO DE NOTAS.
+            escreval("ERRO! VALOR AQUÉM DOS PARÂMETROS. [0-10] Digite novamente as notas do ", Cont, "° aluno:") //CASO ESSA LINHA SEJA REMOVIDA, O USUÁRIO NÃO SABERÁ QUE HOUVE UM ERRO E PARECERÁ, PARA ELE, QUE FOI LIDO QUATRO NOTAS PARA O ALUNO EM QUESTÃO
+            Cont_Loop <- 1                                  //Sendo necessário quebrar o looping das notas e retornar para o contador C, tendo que reiniciá-lo, também.
+          fimse
+          //*********
+        fimenquanto
+        //...............................
+        se (Cont_Loop = 1) entao                            //Catalogar o aluno
+          Media <- soma_nota / 3                            //Calcula a média do aluno
+          soma_nota <- 0                                    //Zera o valor da variável, para que na próxima execução do loop, não seja somado com a nova nota
+          Soma_Media <- Soma_Media + Media                  //Calcula a soma das médias, para que no final seja possível calcular a média geral, dividindo-a pelo número de alunos
+          //AAAAAAAAAAAAAAAAAAAAAAAAAAA
+          se (Media >= 7) entao                             //Verificar se o aluno está aprovado, em recuperação ou reprovado.
+            Aprov <- Aprov + 1
+          senao
+            se (Media >= 5) e (Media <7) entao
+              Recup <- Recup + 1
+            senao
+              Reprov <- Reprov + 1
+            fimse
+          fimse
+          //AAAAAAAAAAAAAAAAAAAAAAAAAAA
+          Cont_Est_T <- 0                                   //fecha o looping principal, caso as entradas sejam válidads, caso contrário,
+                                                            // o usuário digitará a quantidade de alunos e as notas, mas no fim, o programa retorna à pergunta "Quantos alunos serão?"
+          Resp <- "N"                                       //Como o sistema depende da operação dos resultados lógicos, para o loop principal manter-se rodando, as duas verificações precisam ser verdadeira,
+                                                            //porém, nesta parte do programa, as entradas estão corretas e um dos verificador, ao alterá-lo, bastaria para fechar o loop, porém, mantive o transformador do outro verificador
+          Ver_Mens <- 1
+        senao                                              
+          Cont_Est_T <- 1                                   //Impede do loop principal se feche
+          Resp <- "S"
+          Ver_Mens <- 1
+        fimse
+        //..............................
+        C <- 1
+      fimpara
+      //++++++++++++++++++++++++
+    senao                                                  //CASO O NÚMERO DE ALUNOS FOR NEGATIVO, O USUÁRIO TEM O SISTEMA REINICIADO.
+      limpatela
+
+      escreval("VALOR DIGITADO NÃO É OPERÁVEL! ")
+      escreval("Quer Conitnuar? [S/N]")
+      leia(Resp)
+      se (Resp = "S") entao                               //Verificador para manter o programa rodando
+        Cont_Est_T <- 1
+      senao
+        Cont_Est_T <- 0
+        Ver_Mens <- 0                                     //Outro verificador para que caso ao progresso do programa, o usuário digitar um valor inválido e 
+      fimse                                               //em seguida escolher encerrar o programa, e o sistema acabe não mostrando as conclusões sobre as notas, média geral etc.
+    fimse                                                 
+    //--------------------------
+  //FIM
+  fimenquanto
+
+  se (Resp = "N") e (Cont_Est_T = 0) e (Ver_Mens = 1) entao
+    limpatela
+    escreval("------------------------------------------")
+    escreval("    Foram avaliados ", Cont_Alunos, " alunos, destes: ")
+    escreval("    Foram aprovados ", Aprov, " alunos. ")
+    escreval("    ", Recup, " alunos em recuperação. ")
+    escreval("    ", Reprov, " alunos foram reprovados. ")
+    escreval("    A média geral dos alunos é: ", Soma_Media / Cont_Alunos:4:2)
+    escreval("------------------------------------------")
+  fimse
+  
+fimalgoritmo
