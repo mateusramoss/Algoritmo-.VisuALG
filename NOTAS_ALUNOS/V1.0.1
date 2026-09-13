@@ -1,0 +1,93 @@
+algoritmo "semnome"
+var
+  R, Ver: caracter
+  C_quant, C, F: inteiro
+  Quant_alu, V, Aprov, Recup, Reprov, Cont_ver: inteiro
+  Nota, S, M, M_geral, Soma_media: real
+inicio
+  C <- 1
+  Ver <- "S"
+  enquanto(Ver = "S") faca
+    escreval("Quantos alunos serão? ")
+    leia(F)
+    limpatela
+    se(F > 0) entao
+      repita
+        para C_quant de 1 ate F passo 1 faca
+          enquanto (C <= 3) faca
+            escreval("Digite a nota")
+            leia(Nota)
+            //----------------------------------
+            se (Nota >= 0) e (Nota <=10) entao
+              S <- S + Nota
+              V <- 1
+            senao
+              C <- 4
+              V <- 0
+            fimse
+            //----------------------------------
+            C <- C + 1
+          fimenquanto
+          //-----------------------------------------------------------
+          se (V = 1) entao
+            limpatela
+            //---------------------------------
+            se (C_quant < F) entao            
+              escreval("Proximo aluno: ")     
+            fimse                             
+            M <- S / 3                        
+            Soma_media <- Soma_media + M      
+            se (M >= 7) entao                 
+              Aprov <- Aprov + 1              
+            senao                             
+              se (M >= 5) e (M < 7) entao     
+                Recup <- Recup + 1            
+              senao                           
+                Reprov <- Reprov + 1          
+              fimse                           
+            fimse                             
+            //---------------------------------
+            S <- 0
+          senao
+            escreval("VALOR INCONGRUENTE COM O PROPOSITO DO PROGRAMA.")
+            C_Quant <- Quant_alu
+            escreval("Quer continuar?[S/N]")
+            leia(R)
+            limpatela
+            C_quant <- 1
+            C <- 1
+            Cont_ver <- 1
+          fimse
+          //-----------------------------------------------------------
+          se (C_quant < F) entao
+            C <- 1
+          fimse
+          //---------------------
+        fimpara
+        //-----------------------------------
+        se (C_quant = F) e (Nota >= 0) entao
+          R <- "N"
+        fimse
+        //-----------------------------------
+      ate (R = "N")
+      Ver <- "N"//Verificador para quebrar o loop
+    senao
+      escreval("ERRO! VALOR INCONGRUENTE COM O PROPOSITO DO PROGRAMA ")
+      escreval("TENTE NOVAMENTE: ")
+      C_quant <- 1 //Variável recebe 1, reiniciando o contador, para que caso o usuário digite dois e acabe digitando uma nota negativa, o sistema fechar a checagem do primeiro aluno, reiniciando a pergunta e finalizar calculando apenas um aluno.
+    fimse
+  fimenquanto
+//--------------------------------------------------------
+  M_geral <- Soma_media / F
+//--------------------------------------------------------
+  se (V = 1) entao
+    limpatela
+    escreval("------------------------------------------")
+    escreval("    Foram avaliados ", F, " alunos, destes: ")
+    escreval("    Foram aprovados ", Aprov, " alunos. ")
+    escreval("    ", Recup, " alunos em recuperação. ")
+    escreval("    ", Reprov, " alunos foram reprovados. ")
+    escreval("A média geral dos alunos é: ", M_geral)
+    escreval("------------------------------------------")
+  fimse
+fimalgoritmo
