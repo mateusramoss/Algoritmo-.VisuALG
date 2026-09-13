@@ -82,7 +82,7 @@ inicio
         Cont_Est_T <- 1
       senao
         Cont_Est_T <- 0
-        Ver_Mens <- 0                                     //Outro verificador para que caso ao progresso do programa, o usuário digitar um valor inválido e 
+        Ver_Mens <- 0                                     //Ver_mens = Ver mensagem - Outro verificador para se caso ao durante processo do programa, o usuário digitar um valor inválido e  
       fimse                                               //em seguida escolher encerrar o programa, e o sistema acabe não mostrando as conclusões sobre as notas, média geral etc.
     fimse                                                 
     //--------------------------
