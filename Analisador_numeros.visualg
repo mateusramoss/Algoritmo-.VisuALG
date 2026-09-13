@@ -1,0 +1,70 @@
+algoritmo 
+
+var
+  C, Num, Soma_posi, Maior_num, Menor_num, Maior_50, N_Neg, Quant_num, V : inteiro
+inicio
+  repita //LOOP PARA VERIFICAR A ENTRADA DA VARIÁVEL QUANT_NUM, POR PADRÃO, A VARIÁVEL JÁ COMEÇA COM 0, CASO O VALOR INSERIDO SEJA VÁLIDO, AO FINAL DO PROGRAMA,
+         // O VERIFICADOR RECEBE 1 E SAI DO LOOP, CASO RECEBA UM VALOR NEGATIVO, JÁ PULA PARA A MENSAGEM DE ERRO
+    escreval("Quantos números serão inseridos? ")
+      leia(Quant_num)
+    limpatela
+    se (Quant_num > 0) entao
+      para C de 1 ate Quant_num passo 1 faca
+      //INICIO
+        escreval("Digite um número: ")
+          leia(Num)
+          se (C = 1) entao              //Para que não seja necessário setar o contador em 2 e por uma pergunta antes do loop para que as variáveis maior e menor receba o valor da entrada,
+            Maior_num <- Num            //para depois serem comparadas com as entradas seguintes e verificar qual é maior e qual é menor
+            Menor_num <- Num
+          fimse
+          //---------------------------
+          se (Num > Maior_num) entao    //Verifica se o número digitado é maior ou menor que o número menor e o menor
+            Maior_num <- Num          
+          fimse
+          //---------------------------
+
+          //***************************
+          se (Num < Menor_num) entao
+            Menor_num <- Num
+          fimse
+          //***************************
+
+          //+++++++++++++++++++++++++++ //Verifica se os números são menores que zero, maiores que cinquenta e a soma de todos os positivos
+          se (Num > 0) entao
+            Soma_posi <- Soma_posi + Num
+            se (Num > 50) entao
+              Maior_50 <- Maior_50 + 1
+            fimse
+          senao
+            se (Num < 0) entao
+              N_Neg <- N_Neg + 1
+            fimse
+          fimse
+          //+++++++++++++++++++++++++++
+      //FIM
+      V <- 1
+      fimpara
+    senao
+      escreval("ERRO! VALOR DIGITADO NÃO É OPERÁVEL. TENTE NOVAMENTE: ")
+      V <- 0
+    fimse
+  ate (V = 1)
+
+    limpatela
+    se (Maior_num <> 0) ou (Menor_num <> 0) entao //CASO SEJA INSERIDO APENAS VALORES NULOS, NÃO É MOSTRADO AS CONCLUSÕES DE MAIOR, MENOR E NEGATIVOS.
+      escreval("O maior número digitado foi: ", Maior_num)
+      escreval("O menor número digitado foi: ", Menor_num)
+    senao
+      escreval("Houve apenas a entrada de valores nulos")
+    fimse
+
+    se (Maior_50 > 0) entao          //CASO NÃO TENHA SIDO INSERIDO QUALQUER VALOR MAIOR QUE CINQUENTA, A ESTRUTURA NÃO INICIA, O QUE EVITA POLUIÇÃO NO TERMINAL
+      escreval("há ", Maior_50, " número(s) maior(es) que cinquenta, dos números digitados.")
+    fimse
+    se (N_Neg >= 1) entao
+      escreval("São menores que zero, negativos, ", N_Neg, " números, dos digitados")
+    fimse
+    se (Soma_posi > 0) entao         //MESMA RASÃO QUE O MAIOR_50 ^^
+    escreval("A soma de todos os números positivos: ", Soma_posi)
+    fimse
+fimalgoritmo
