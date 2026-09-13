@@ -1,0 +1,130 @@
+//Com loop caso o valor da nota seja menor que zero e maior que 10, não termina o loop caso responda N na pergunta
+algoritmo "semnome"
+var
+  R, Ver: caracter
+  C_quant, C, F: inteiro
+  Quant_alu, V, Aprov, Recup, Reprov, Cont_ver, Ver_con: inteiro
+  Nota, S, M, M_geral, Soma_media: real
+inicio
+  C <- 1
+  Ver <- "S"
+  Ver_con <- 1
+  repita
+    Ver_con <- 0
+    escreval("AAAAAAAAAAAAAAAAA")
+    repita
+      escreval("KKKKKKKKKKKKKKKKKKKKKK")
+      escreval("Quantos alunos serão? ")
+      leia(F)
+      limpatela
+      se(F > 0) entao//controla o valor da entrada de alunos, caso seja negativo ou igua a zero, volta para [ escreval("quantos alunos serão?") leia(F) ]
+        escreval(" 89EQWDA65")
+        repita
+          escreval(" 231543ADAS")
+          //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+          para C_quant de 1 ate F passo 1 faca//Controlador para quantidade de vezes que que será pedido as notas para cada novo aluno
+            escreval(" ASDAD")
+            repita //Controla a leitura de três notas
+              escreval("Digite a nota")
+              leia(Nota)
+              //----------------------------------
+              se (Nota >= 0) e (Nota <=10) entao
+                S <- S + Nota
+                V <- 1 // Variável recebe 1 para permitir o programa calcular Média, veriicar os aprov, reprov..etc, mostrar os aprovados, repro...média geral no final do programa.
+              senao
+                C <- 4
+                V <- 0 // Variável recebe 0 para não permitir o programa mostrar os aprovados, repro...média geral.
+                Ver_con <- 1
+                C_quant <- F
+              fimse
+              //----------------------------------
+              C <- C + 1
+            ate (C > 3)
+            //-----------------------------------------------------------
+            se (V = 1) entao//VERIFICADOR USADO PARA CATALOGAR OS ALUNOS
+              limpatela
+              //INIICO1
+              se (C_quant < F) entao
+                escreval("Proximo aluno: ")
+              fimse
+
+              M <- S / 3 //Calcula a média de um aluno
+              Soma_media <- Soma_media + M //Calcula a média de todos os alunos
+
+              //Verifica quem é está aprovado, recuperação e reprovado
+              //INICIO2
+              se (M >= 7) entao
+                Aprov <- Aprov + 1
+              senao
+                se (M >= 5) e (M < 7) entao
+                  Recup <- Recup + 1
+                senao
+                  Reprov <- Reprov + 1
+                fimse
+              fimse
+              //FIM2
+              //FIM1
+              S <- 0 //Soma recebe zero para que ao entrar as notas de um novo aluno, elas não sejam acumuladas com as anteriores.
+            senao//caso V = 0, recebendo 0 caso o valor seja menor que zero ou maior que 10, entra nessa estrutura
+              //INICIO
+              escreval("VALOR INCONGRUENTE COM O PROPOSITO DO PROGRAMA.")
+              C_Quant <- Quant_alu
+              escreval("Quer continuar?[S/N]")
+              leia(R)
+              limpatela
+              C_quant <- 1//reinicia o contador do loop que controla quantos alunos foram lidos
+
+              //caso seja inserido que haverá 2 loops(alunos) e valores entre 0 e 10, mas, no aluno seguinte
+              //se o valor for negativo, será reiniciado o valor de quais foram aprovados, em recuperação e reprovados, senão, o número de alunos será três.
+              //INICIO
+              Aprov <- 0
+              Recup <- 0
+              Reprov <- 0
+              //FIM
+              //FIM
+            fimse
+            //-----------------------------------------------------------
+            se (C_quant < F) entao
+              C <- 1 //reinicia o contador que marca quantas notas já foram lidas
+            fimse
+            //---------------------
+
+          fimpara//FIM do Loop do controlador da quantidade de leituras em relação à quantidade de alunos
+          //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+          //-----------------------------------
+          se (C_quant >= F) e (Nota >= 0) entao
+            R <- "N"
+          fimse
+        ate (R = "N")
+//------------------------------------------------------
+
+        se (Ver_con = 1) entao
+          Ver <- "S"
+        senao
+          Ver <- "N"//Verificador para quebrar ou continuar o loop caso seja digitado um valor negativo em uma entrada de um segundo ou maior aluno
+        fimse
+
+        //---------------------------------------------
+      senao
+        escreval("ERRO! VALOR INCONGRUENTE COM O PROPOSITO DO PROGRAMA ")
+        escreval("TENTE NOVAMENTE: ")
+        C_quant <- 1 //Variável recebe 1, reiniciando o contador, para que caso o usuário digite dois e acabe digitando uma nota negativa, o sistema fechar a checagem do primeiro aluno, reiniciando a pergunta e finalizar calculando apenas um aluno.
+      fimse
+    ate (Ver = "N")
+  ate (Ver_con = 0)
+
+  //--------------------------------------------------------
+  M_geral <- Soma_media / F
+  //--------------------------------------------------------
+  se (V = 1) entao
+    limpatela
+    escreval("------------------------------------------")
+    escreval("    Foram avaliados ", F, " alunos, destes: ")
+    escreval("    Foram aprovados ", Aprov, " alunos. ")
+    escreval("    ", Recup, " alunos em recuperação. ")
+    escreval("    ", Reprov, " alunos foram reprovados. ")
+    escreval("A média geral dos alunos é: ", M_geral:4:2)
+    escreval("------------------------------------------")
+  fimse
+fimalgoritmo
