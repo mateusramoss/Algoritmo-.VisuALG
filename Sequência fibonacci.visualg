@@ -4,13 +4,15 @@ var
   quant, C, V_V, V_N, T: inteiro
 inicio
   escreval("Quantos números da sequência Fibonacci irá querer?")
-    leia(quant)
-  V_N <- 1
-  escreva(V_V, " ")
-  para C de 1 ate quant - 1 passo 1 faca
-    T <- V_N
-    V_N <- V_V + V_N
-    V_V <- T
-    escreva(V_N, " ")
-  fimpara 
+  leia(quant)                            //Valor velho e valor novo já têm seus valores definidos antes, para que seja possível formar novos números.
+  V_V <- 0
+  V_N <- 1                               //Valor novo(V_N) e Valor velho(V_V)
+  escreva(V_V, " ")                      //V_V começa com zero
+  para C de 1 ate quant - 1 passo 1 faca //Quant teve valor subtraído porque já é mostrado um valor da sequência fora do loop
+    T <- V_N                             //Variável temporária usada para substituição
+    V_N <- V_V + V_N                     //Formação do novo número antigo com o novo
+    V_V <- T                             //É usado para que o valor velho se torne o antigo novo. 
+    escreva(V_N, " ")                    //Começando com 0 e 1, V_V e V_N, respectivamente, T vai receber 1, o novo valor será a soma de 0 e 1, formando o novo num = 1
+                                         //Valor velho receberá o antigo valor novo, 1, que estava armazenado em T.
+  fimpara
 fimalgoritmo
