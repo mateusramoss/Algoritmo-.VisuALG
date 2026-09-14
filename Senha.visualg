@@ -1,0 +1,25 @@
+algoritmo "Primeiro Programa"
+
+var
+  senha, Poss_senha, C: inteiro
+inicio
+  senha <- 7856
+  C <- 1
+  repita  
+    escreval("Qual é a senha? ")
+      leia(Poss_senha)
+    se (Poss_senha > 0) entao
+      se (Poss_senha <> senha) entao
+        escreval("Você ainda tem ", 5 - C, " chances")
+      fimse
+      C <- C + 1
+    senao
+      escreval("Valor inoperável. [", Poss_senha, "]")
+    fimse
+  ate (C > 5) ou (Poss_senha = senha)
+  se (Poss_senha = senha) entao
+    escreval("Login concluído")
+  senao
+    escreval("Tentativas esgotadas. Login bloqueado.")
+  fimse
+fimalgoritmo
