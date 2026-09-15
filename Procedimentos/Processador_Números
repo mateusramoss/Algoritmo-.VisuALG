@@ -1,0 +1,56 @@
+algoritmo 
+
+var
+  Quant_num, C, Neg, Nulo, Posit, V, Quant_Par, Quant_Impar: inteiro
+  Num, Soma_positivos: real
+  procedimento Contador_geral(var A: inteiro)                 //Contador que será usado em todo o programa por diferentes estruturas. É utilizado passagem por referência, para que o contador altere a variável relacionada 
+  inicio                                                      //ao trecho que chamou-o
+    A <- A + 1
+  fimprocedimento
+
+
+inicio                                                        //COLOQUEI UM VERIFICADOR PARA ENTRADA DO USUÁRIO AO DIGITAR A QUANTIDADE DE NÚMEROS.
+  enquanto (V = 0) faca
+    escreval("Quantos números serão processados? ")
+      leia(Quant_num)
+    se (Quant_num > 0) entao
+      para C de 1 ate Quant_num faca
+        escreva("Digite o ", C, "° número: ")
+          leia(Num)
+          escreval(Num)
+        //---------------------------                           //ESTRUTURA QUE VERIFICA O VALOR DOS NÚMEROS INFORMADOS, CHAMANDO O PROCEDIMENTO DE CONTAGEM E COM PASSAGEM POR REFERÊNCIA.
+        se (Num < 0) entao
+          Contador_geral(Neg)
+        senao
+          se (Num = 0) entao
+            Contador_geral(Nulo)
+          senao
+            Contador_geral(Posit)
+            Soma_positivos <- Soma_positivos + Num               //Faz a soma de todos os números positivos.
+          fimse
+        fimse
+        //---------------------------
+
+        se ((Num < -1) ou (Num > 1)) e (Num mod 2 = 0) entao
+          Contador_geral(Quant_Par)
+        senao
+          se (Num mod 2 = 1) ou (Num mod 2 = -1) entao
+            Contador_geral(Quant_Impar)
+          fimse
+        fimse
+      fimpara
+      V <- 1
+    senao
+      limpatela
+      escreval("Valor Inconsistente para ser trabalhado.") 
+    fimse
+  fimenquanto
+  se (V = 1) entao
+    escreval("A quantidade de números positivos é: ", Posit)
+    escreval("A quantidade de números negativos é: ", Neg)
+    escreval("A quantidade de números nulos é: ", Nulo)
+    escreval("A quantidade de números pares é: ", Quant_Par)
+    escreval("A quantidade de números ímpares é: ", Quant_Impar)
+    escreval("A soma de todos os números positivos é de: ", Soma_positivos)
+  fimse
+fimalgoritmo
