@@ -1,0 +1,114 @@
+Algoritmo "semnome"
+
+var
+  resp, resp_F: caracter
+  V, saque, C_100, C_50, C_20, C_10, C_5, C_2, Nota, Cont_saq : inteiro
+  Som_100, Som_50, Som_20, Som_10, Som_5, Som_2, Verif, saque_temp: inteiro
+procedimento calc_notas(var A, B, C: inteiro)
+  inicio
+    B <- B - A
+    C <- C + 1
+fimprocedimento
+procedimento contador(var A: inteiro)
+  inicio
+    A <- A + 1
+fimprocedimento
+inicio
+  repita
+    escreva("Digite o valor a ser sacado: ")
+    leia(saque)
+    escreval(saque)
+    saque_temp <- saque_temp + saque
+    saque <- saque_temp
+    se (saque > 1) entao
+      repita
+        se (saque >= 100) entao
+          Nota <- 100
+          calc_notas(Nota, saque, C_100)
+        fimse
+        se (saque >= 50) e (saque < 100) entao
+          Nota <- 50
+          calc_notas(Nota, saque, C_50)
+        fimse
+        se (saque >= 20) e (saque < 50) entao
+          Nota <- 20
+          calc_notas(Nota, saque, C_20)
+        fimse
+        se (saque >= 10) e (saque < 20) entao
+          Nota <- 10
+          calc_notas(Nota, saque, C_10)
+        fimse
+        se (saque >= 5) e (saque < 10) entao
+          Nota <- 5
+          calc_notas(Nota, saque, C_5)
+        fimse
+        se (saque >= 2) e (saque < 5) entao
+          Nota <- 2
+          calc_notas(Nota, saque, C_2)
+        fimse
+      ate (saque = 0) ou ( saque = 1)
+      Verif <- 0
+      se (saque = 0) ou (saque = 1) entao
+        Som_100 <- Som_100 + C_100
+        Som_50 <- Som_50 + C_50
+        Som_20 <- Som_20 + C_20
+        Som_10 <- Som_10 + C_10
+        Som_5 <- Som_5 + C_5
+        Som_2 <- Som_2 + C_2
+      fimse
+    senao
+      limpatela
+      Verif <- 1
+      escreval("Saque n�o pode ser realizado")
+      escreval("Quer continuar? [S/N]")
+      leia(resp)
+      escolha resp
+        caso "S"
+          V <- 0
+        caso "N"
+          V <- 1
+      fimescolha
+    fimse
+    
+    se (Verif = 0) entao
+      escreval("Deseja fazer outro saque? [S/N]")
+      leia(resp_F)
+      escolha resp_F
+        caso "S"
+          V <- 0
+          contador(Cont_saq)
+          C_100 <- 0
+          C_50 <- 0
+          C_20 <- 0
+          C_10 <- 0
+          C_5 <- 0
+          C_2 <- 0
+          Som_100 <- 0
+          Som_50 <- 0
+          Som_20 <- 0
+          Som_10 <- 0
+          Som_5 <- 0
+          Som_2 <- 0
+
+        caso "N"
+          contador(Cont_saq)
+          V <- 1
+      fimescolha
+    fimse
+  ate(V = 1)
+
+  se (V = 1) e (C_100 <> 0) ou (C_50 <> 0) ou (C_20 <> 0) ou (C_10 <> 0) ou (C_5 <> 0) ou (C_2 <> 0)  entao //resultado das notas sacadas
+    limpatela
+    escreval("Foram feitos ", Cont_saq, " pedidos de saques.")
+    escreval("Notas imprimidas ")
+    escreval("De R$100,00: ", Som_100)
+    escreval("De R$50,00: ", Som_50)
+    escreval("De R$20,00: ", Som_20)
+    escreval("De R$10,00: ", Som_10)
+    escreval("De R$5,00: ", Som_5)
+    escreval("De R$2,00: ", Som_2)
+    se (saque = 1) entao
+       escreval("R$1,00 n�o pode ser sacado")
+    fimse
+  fimse
+Fimalgoritmo
