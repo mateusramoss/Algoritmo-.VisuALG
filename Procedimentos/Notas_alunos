@@ -1,0 +1,73 @@
+algoritmo
+
+var
+  C, Cont_Tot_alun, Quant_alun, V, aprov, recup, reprov: inteiro  //V é uma variável de autenticação, C, Cont_Tot_alun são variáveis de contagem.
+  Num,  media, soma, media_geral, soma_media: real                 //Media é a variável que armazena a média de um indivíduo temporário.
+
+procedimento Calc_media(var A, B, C: real)
+  inicio
+    A <- B / C
+fimprocedimento
+
+procedimento Calc_C_anterior(var A, B: real)
+  inicio
+    B <- B + A
+fimprocedimento
+
+procedimento contador_simples(var A: inteiro)
+  inicio
+    A <- A + 1
+fimprocedimento
+//------------------------------------------------------------
+inicio
+  Cont_Tot_alun <- 1
+  enquanto (V = 0) faca
+    escreval("Quantos alunos serão inseridos? ")
+    leia(Quant_alun)
+    se (Quant_alun > 0) entao
+      repita
+        //++++++++++++++++++++++++++++++++++++++
+        escreval(Cont_Tot_alun, "° aluno. ")
+        para C de  1 ate 3 faca
+          escreva("Digite a ", C, "° nota: ")
+          leia(Num)
+          escreval(Num)
+          se (Num >=0 ) e (Num <= 10) entao
+            Calc_C_anterior(Num, soma)
+            se (C = 3) entao                                    //Quando o contador chegar à 3, será calculado a média do aluno e irá verificar em que situação ele ficou.
+              Calc_media(media, soma, C)                        //CALCULA A MÉDIA INDIVIDUAL DO ALUNO
+              se (media >= 7) entao
+                contador_simples(aprov)
+              senao
+                se (media >= 5) e (media < 7) entao
+                  contador_simples(recup)
+                senao
+                  contador_simples(reprov)
+                fimse
+              fimse
+            fimse
+          senao
+            escreval("ERRO! VALOR INOPERÁVEL. INSIRA, NOVAMENTE, OS NÚMEROS. ")
+            C <- 1
+          fimse
+
+        fimpara
+        //++++++++++++++++++++++++++++++++++++++
+        Calc_C_anterior(media, soma_media)
+        contador_simples(Cont_Tot_alun)
+        limpatela
+      ate (Cont_Tot_alun > Quant_alun)
+      Calc_media(media_geral, soma_media, Quant_alun)           //CALCULA A MÉDIA GERAL EM RELAÇÃO À TODOS OS ALUNOS
+      V <- 1
+    senao
+      limpatela
+      escreval("ERRO! VALOR INOPERÁVEL. TENTE NOVAMENTE: ")
+    fimse
+  fimenquanto
+  se (V = 1) entao
+    escreval("Foram aprovados ", aprov, " alunos.")
+    escreval("Ficaram em recuperação ", recup, " alunos. ")
+    escreval("Foram reprovados ", reprov, " alunos. ")
+    escreval("A média geral da turma foi ", media_geral:4:2)
+  fimse
+fimalgoritmo
