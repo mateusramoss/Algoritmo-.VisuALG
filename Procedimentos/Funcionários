@@ -1,0 +1,121 @@
+Algoritmo 
+
+var
+
+  Sexo, resp: caracter
+  quant_pess, Cont, Idade, V, Cont_Masc, Cont_Fem, Cont_menor_id, Cont_cincoM: inteiro
+  Salar, Maior_Salar, Menor_Salar, Tot_salars: real
+
+procedimento contador(var A: inteiro)
+inicio
+  A <- A + 1
+fimprocedimento
+
+inicio
+  Cont <- 1
+  V <- 1
+  //**************************************************************
+  repita
+    escreval("Quantas pessoas serão cadastradas? ")
+      leia(quant_pess)
+    se (quant_pess > 0) entao
+      enquanto (Cont <= quant_pess) faca
+        //--------------------------------------------------------
+        escreval(Cont, "° pessoa - ")
+        repita
+          escreva("Digite a idade: ")
+            leia(Idade)
+            escreval(Idade)
+          V <- 0
+          se (Idade <= 0) entao
+            escreval("ERRO! Digite a idade novamente. ")
+            V <- 1
+          senao
+            se (Idade <= 18) entao
+              contador(Cont_menor_id)
+            fimse
+          fimse
+        ate (V = 0)
+        repita
+          escreva("Digite o sexo [M/F]: ")
+            leia(Sexo)
+            escreval(Sexo)
+          escolha Sexo
+            caso "M"
+              V <- 0
+              contador(Cont_Masc)
+            caso "F"
+              V <- 0
+              contador(Cont_Fem)
+            outrocaso
+              limpatela
+              escreval("ERRO! Tente novamente: ")
+              V <- 1
+          fimescolha
+        ate (V = 0)
+        repita
+          escreva("Digite o salário: ")
+            leia(Salar)
+            escreval(Salar)
+          se (Cont = 1) entao
+            Maior_Salar <- Salar
+            Menor_Salar <- Salar
+          fimse
+          se (Salar > 0) entao
+            se (Salar > 5000.00) entao
+              contador(Cont_cincoM)
+            fimse
+            Tot_salars <- Tot_salars + Salar
+            limpatela
+            V <- 0
+          senao
+            V <- 1
+            limpatela
+            escreval("ERRO! Tente novamente: ")
+          fimse
+        ate (V = 0)
+        se (Salar > Maior_Salar) entao
+          Maior_Salar <- Salar
+        fimse
+        se (Salar < Menor_Salar) entao
+          Menor_Salar <- Salar
+        fimse
+        contador(Cont)      //Contador do loop principal
+      fimenquanto
+      //-----------------------------------------------------
+      V <- 2
+    senao
+      limpatela
+      escreval("ERRO! TENTE NOVAMENTE.")
+      escreval("Quer continuar? [S/N]")
+        leia(resp)
+      escolha resp
+        caso "S"
+          V <- 1
+        caso "N"
+          V <- 0
+          se (cont > 1) entao
+            escreval("Quer Saber o resultado dos outros seres? [S/N]")
+              leia(resp)
+            se (resp = "S") entao
+              V <- 3
+            fimse
+          fimse
+
+      fimescolha
+    fimse
+  ate (V = 0) ou (V = 3) ou (V = 2)
+//**************************************************************
+  se (V = 2) entao
+    V <- 3
+  fimse
+
+  se (V = 3) entao
+    escreval("A quantidade de machos é: ", Cont_Masc)
+    escreval("A quantidade de fêmeas é: ", Cont_Fem)
+    escreval("A média salarial de todos é: ", Tot_salars / quant_pess)
+    escreval("O menor salário foi de: ", Menor_Salar, " e o maior salário é de: ", Maior_Salar)
+    escreval("Há ", Cont_menor_id, " menor(es) de idade(s).")
+    escreval("Há ", Cont_cincoM, " com salário(s) maior(es) que cinco mil reais.")
+  fimse
+Fimalgoritmo
