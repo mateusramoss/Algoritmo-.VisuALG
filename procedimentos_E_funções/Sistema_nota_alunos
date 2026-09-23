@@ -1,0 +1,182 @@
+Algoritmo "semnome"
+var
+  avali: caracter
+  quant_alun, verif, Contad, peso, Aprov, Recup, Result, Reprov, Frequen, assistidas, Verif_situ, C, Reprov_notas, Reprov_faltas: inteiro
+  Nota, media_pond, Avaliacao, Maior_media, Menor_media, Maior_percent, Menor_percent, media_geral, soma_medias: real
+
+  procedimento verificador(var A, B: real)
+    inicio
+      se (A > 0) entao
+        B <- 1
+      senao
+        B <- 0
+        escreval("ERRO! TENTE NOVAMENTE. ")
+      fimse
+  fimprocedimento
+
+  procedimento contador(var A: inteiro)
+    inicio
+     A <- A + 1
+  fimprocedimento
+
+  funcao tipo_avaliacao(var A, B: real): caracter
+
+    inicio
+      escolha A
+        caso 1
+          retorne "a 1� prova"
+          B <- 3
+        caso 2
+          retorne "a 2� prova"
+          B <- 3
+        caso 3
+          retorne "o projeto"
+          B <- 2
+        caso 4
+          retorne "o trabalho"
+          B <- 2
+      fimescolha
+  fimfuncao
+
+  procedimento media_ponderada(var A,B,C,D: real)
+    inicio
+      D <- D + (A * B)
+      se (C = 4) entao
+        D <- D/10
+      fimse
+  fimprocedimento
+
+  funcao situacao(var A, B: real): inteiro
+    inicio
+      se (A >= 7) e (B >= 75) entao
+        retorne 1
+      senao
+        se (A >= 5) e (A < 7) e (B >=75) entao
+          retorne 2
+        senao
+          retorne 3
+        fimse
+      fimse
+  fimfuncao
+
+  funcao reprovados_Nota_Freq(var A, B: real): inteiro
+  inicio
+    se (A >= 5) e (A <= 10) e (B < 75) entao
+      retorne 1
+    senao
+      se (A < 5) e (B >= 75) entao
+        retorne 2
+      senao
+        retorne 3
+      fimse
+    fimse
+    
+  fimfuncao
+
+  procedimento Maior_menor(var A, B, C: real)
+    inicio
+      se (A > B) entao
+        B <- A
+      senao
+        se (A < C) entao
+          C <- A
+        fimse
+      fimse
+  fimprocedimento
+
+  procedimento soma_anterior(var A, B: real)
+    inicio
+      B <- B + A
+  fimprocedimento
+
+//---------------------------------------
+inicio
+  repita
+    escreval("Quantos ser�o avaliados? ")
+      leia(quant_alun)
+    verificador(quant_alun, verif)
+  ate (verif = 1)
+
+  Contad <- 1
+  repita
+    C <- 1
+    limpatela
+    escreval(Contad, "� Aluno")
+    repita
+      escreval("Digite a nota d", tipo_avaliacao(C, peso))
+        leia(Nota)
+
+      se (Nota >= 0) e (Nota <= 10) entao                 //VERIFICADOR NOTAS
+        verif <- 1
+        media_ponderada(Nota, peso, C, media_pond)
+      senao
+        verif <- 0
+        limpatela
+        escreval("ERRO! TENTE NOVAMENTE")
+      fimse
+      se (Contad = 1) entao
+        Maior_media <- media_pond
+        Menor_media <- media_pond
+      fimse
+      se (C = 4) entao
+        Maior_menor(media_pond, Maior_media, Menor_media)
+      fimse
+
+      contador(C)
+      se (verif = 0) entao
+         C <- C - 1
+      fimse
+    ate (verif = 1) e (C > 4)
+    soma_anterior(media_pond, soma_medias)
+     repita
+       escreval("Quantas aulas tem o per�odo? ")
+         leia(Frequen)
+       escreval("Quantas aulas foram assistidas? ")
+         leia(assistidas)
+       se (assistidas > frequen) entao
+          escreval("ERRO! AULA ASSISTIDA MAIOR QUE A QUANTIDADE TOTAL. TENTE NOVAMENTE. ")
+          verif <- 0
+       senao
+          verif <- 1
+       fimse
+    ate (verif = 1)
+      Avaliacao <- ((assistidas / Frequen) * 100)
+    se (Contad = 1) entao
+      Maior_percent <- Avaliacao
+      Menor_percent <- Avaliacao
+    fimse
+
+    Maior_menor(Avaliacao, Maior_percent, Menor_percent)
+    Verif_situ <- situacao(media_pond, Avaliacao)
+    escolha Verif_situ
+      caso 1
+        contador(Aprov)
+      caso 2
+        contador(Recup)
+      caso 3
+        contador(Reprov)
+    fimescolha
+
+    Result <- reprovados_Nota_Freq(media_pond, Avaliacao)
+    escolha Result
+      caso 1
+        contador(Reprov_faltas)
+      caso 2
+        contador(Reprov_notas)
+    fimescolha
+
+    contador(Contad)
+  ate (Contad > quant_alun)
+  limpatela
+  media_geral <- soma_medias / quant_alun
+  escreval("Foram aprovados ", Aprov, " alunos. ")
+  escreval("Ficaram, em recupera��o, ", Recup, " alunos.")
+  escreval("Foram reprovados, por nota, ", Reprov_notas, " alunos. ")
+  escreval("Foram reprovados, por frequ�ncia, ", Reprov_faltas, " alunos. ")
+  escreval("A m�dia, geral, das notas �: ", media_geral:4:2)
+  escreval("A maior m�dia, entre os alunos, � de ", Maior_media:4:2)
+  escreval("A menor m�dia, entre os alunos, � de ", Menor_media:4:2)
+  escreval("O maior percentual de frequ�ncia � de ", Maior_percent, "%")
+  escreval("O menor percentual de frequ�ncia � de ", Menor_percent, "%")
+
+Fimalgoritmo
