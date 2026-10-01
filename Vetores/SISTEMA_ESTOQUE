@@ -1,0 +1,420 @@
+Algoritmo "semnome"
+var
+
+  Verif_Final, C, Resp, Verif_estrut, Contador_Ver_menu, Ve, Z, Verif_estrtu_seguint, quant_cadastro, V, Temp, D, Num, Quantidade, Verif_f, Tipo_Pac, Var_venda_intei, quant_dese, Choice, montante: inteiro
+  nome_prod, Answ, Resp_vendas, Resps: caracter
+  preco_prod, Calc_Venda, Novo_valor: real
+
+  //VETORES:
+  Verif_menu: vetor [1..7] de inteiro
+  nome_produto: vetor[1..20] de caracter
+  preco_produto: vetor[1..20] de real
+  Quantidade_produtos: vetor[1..20] de inteiro
+  Fardo: vetor[1..20] de inteiro
+  Tipo_Fard: vetor [1..20] de inteiro
+
+procedimento menu(var A: inteiro)
+  inicio
+    limpatela
+    escreval("------------------------")
+    escreval("|         MENÚ         |")
+    escreval("------------------------")
+    escreval("| 1 - Lista de produtos|")
+    escreval("| 2 - Consultar Valor  |")
+    escreval("| 3 - Realizar venda   |")
+    escreval("| 4 - Repor estoque    |")
+    escreval("| 5 - Cadastro         |")
+    escreval("| 6 - Encerrar         |")
+    escreval("------------------------")
+    leia(A)
+fimprocedimento
+procedimento Mensagem(var B, D: inteiro)
+  var A: caracter
+    C: inteiro
+  inicio
+    repita
+      escreval("FIM PROGRAMA")
+      escreval("Quer continuar? [S/N]")
+       leia(A)
+      se (A = "S") entao
+        B <- 0
+        C <- 1
+        D <- 0
+      senao
+        se (A = "N") entao
+          B <- 1
+          C <- 1
+          D <- 1
+        senao
+          C <- 0
+          escreval("ERRO. TENTE NOVAMENTE")
+        fimse
+      fimse
+    ate (C = 1)
+fimprocedimento
+procedimento ERRO(var A, B: inteiro)
+  inicio
+    se (A > 0) entao
+      B <- 1
+    senao
+      escreval("ERRO. TENTE NOVAMENTE")
+      B <- 0
+    fimse
+fimprocedimento
+procedimento ERROZ(var A, B: real)
+  inicio
+    se (A > 0) entao
+      B <- 1
+    senao
+      escreval("ERRO. TENTE NOVAMENTE")
+      B <- 0
+    fimse
+fimprocedimento
+
+procedimento ListaP(A: inteiro)
+  inicio
+    limpatela
+    escreval("List dos Produtos - ")
+    escreval("Nome:")
+    para A de 1 ate 20 faca
+      se (nome_produto[A] <> "") entao
+        escreval(A, " - ", nome_produto[A])
+      fimse
+    fimpara
+fimprocedimento
+procedimento Valida_Lista(var A, B: inteiro)
+  inicio
+    se (A > 0) e (A <= 20) entao
+      B <- 1
+    senao
+      escreval("ERRO. TENTE NOVAMENTE")
+      B <- 0
+    fimse
+fimprocedimento
+inicio
+
+  repita
+    //-----------MENÚ---------------
+    C <- 0
+    repita
+      menu(Resp)
+      repita
+        C <- C + 1
+        Verif_menu[C] <- C
+        se (Resp = Verif_menu[C]) entao
+          Verif_estrut <- 1
+          C <- 6
+          se (Resp = 6) entao
+            Verif_estrtu_seguint <- 0
+            Verif_f <- 0
+            V <- 1
+          senao
+            Verif_estrtu_seguint <- 1
+          fimse
+        senao
+          Verif_estrut <- 2
+        fimse
+      ate (C = 6)
+      se (Verif_estrut = 2) entao
+        escreval("ERRO. TENTE NOVAMENTE")
+        Mensagem(Verif_estrut, C)
+      fimse
+    ate (Verif_estrut = 1)
+    //----- LISTA DOS PRODUTOS -----
+    se (Verif_estrtu_seguint = 1) e (Resp = 1) entao
+      ListaP(Verif_f)
+      Verif_f <- 1
+    fimse
+    //---- CONSULTAR VALORES ------
+    se (Verif_estrtu_seguint = 1) e (Resp = 2) entao
+      repita
+        ListaP()
+        escreval("-------------------")
+        repita
+          escreval("Qual deles quer saber o preço? [1...20]: ")
+          leia(Num)
+          valida_lista(Num, V)
+            se (V = 1) entao
+             se (nome_produto[Num] <> "") entao
+
+                  escreval("Produto - ", nome_produto[Num])
+                  escreval("Valor - R$", preco_produto[Num])
+                  escreval("Voulume, no estoque: ", Quantidade_produtos[Num])
+                  escreval("Valor total do estoque: R$", (Quantidade_produtos[Num] * preco_produto[Num]):4:2)
+                  escreval("Número que forma fardos fechados: ", Fardo[Num])
+                  escreval("Diferença entre o número de unidades que formam um fardo e as que não formam: ", Quantidade_produtos[Num] - Fardo[Num] * Tipo_Fard[Num])
+
+             senao
+               escreval("ERRO. OPÇÃO INVÁLIDA.")
+               V <- 0
+             fimse
+          fimse
+        ate (V = 1)
+      ate (V = 1)
+      Verif_f <- 1
+    fimse
+    // ------ REALIZAR VENDAS -------
+    se (Verif_estrtu_seguint = 1) e (Resp = 3) entao
+      ListaP()
+       repita
+         repita
+           V <- 0
+           escreval("Selecione um produto. Número da coluna ou o nome dele. ")
+           leia(Resp_vendas)
+           escolha Resp_vendas
+             caso "1"
+               Var_venda_intei <- 1
+               V <- 1
+             caso "2"
+               Var_venda_intei <- 2
+               V <- 1
+             caso "3"
+               Var_venda_intei <- 3
+               V <- 1
+             caso "4"
+               Var_venda_intei <- 4
+               V <- 1
+             caso "5"
+               Var_venda_intei <- 5
+               V <- 1
+             caso "6"
+               Var_venda_intei <- 6
+               V <- 1
+             caso "7"
+               Var_venda_intei <- 7
+               V <- 1
+             caso "8"
+               Var_venda_intei <- 8
+               V <- 1
+             caso "9"
+               Var_venda_intei <- 9
+               V <- 1
+             caso "10"
+               Var_venda_intei <- 10
+               V <- 1
+             caso "11"
+               Var_venda_intei <- 11
+               V <- 1
+             caso "12"
+               Var_venda_intei <- 12
+               V <- 1
+             caso "13"
+               Var_venda_intei <- 13
+               V <- 1
+             caso "14"
+               Var_venda_intei <- 14
+               V <- 1
+             caso "15"
+               Var_venda_intei <- 15
+               V <- 1
+             caso "16"
+               Var_venda_intei <- 16
+               V <- 1
+             caso "17"
+               Var_venda_intei <- 17
+               V <- 1
+             caso "18"
+               Var_venda_intei <- 18
+               V <- 1
+             caso "19"
+               Var_venda_intei <- 19
+               V <- 1
+             caso "20"
+               Var_venda_intei <- 20
+               V <- 1
+           fimescolha
+           Temp <- Var_venda_intei
+           se (V = 0) entao
+             C <- 1
+             repita
+               se (Resp_vendas = nome_produto[C]) entao
+                 Temp <- C
+                 C <- 21
+                 V <- 1
+               senao
+                 V <- 0
+               fimse
+               C <- C + 1
+             ate (C > 20)
+           fimse
+         ate (V = 1)
+       se (nome_produto[Temp] <> "")entao
+         repita
+           escreval("Digite a quantidade desejada: ")
+           leia(quant_dese)
+           ERRO(quant_dese, V)
+           se (V = 1) entao
+             se (quant_dese <= Quantidade_produtos[Temp]) entao
+               Calc_Venda <- quant_dese * preco_produto[Temp]
+               Quantidade_produtos[Temp] <- Quantidade_produtos[Temp] - quant_dese
+               escreval("TOTAL A PAGAR: ", Calc_Venda)
+               escreval("Restaram, no estoque, ", Quantidade_produtos[Temp], " unidades de ",nome_produto[Temp])
+               V <- 1
+             senao
+               escreval("ESTOQUE INSUFICIENTE. ")
+               escreval("Temos: ", Quantidade_produtos[Temp])
+               escreval("Tente novamente")
+               V <- 0
+             fimse
+           fimse
+         ate (V = 1)
+       senao
+         V <- 0
+       fimse
+      ate (V = 1)
+      Verif_f <- 1
+    fimse
+    // ----- REPOR ESTOQUE -----
+    se (Verif_estrtu_seguint = 1) e (Resp = 4) entao
+      ListaP()
+      repita
+        escreval("Escolha um produto [1..20]: ")
+        leia(Choice)
+        Valida_Lista(Choice, V)
+        se (V = 1)entao
+           se (nome_produto[Choice] <> "")entao
+              V <- 1
+           senao
+              repita
+                 escreval("ERRO. ENTRADA INVÁLIDA")
+                 escreval("Quer continuar? [S/N]")
+                   leia(Resps)
+                 se (Resps = "S") entao
+                   V <- 0
+                 senao
+                    se (Resps = "N") entao
+                       V <- 3
+                    senao
+                       V <- 2
+                       escreval("Você digitou '", Resps,"'")
+                    fimse
+                 fimse
+              ate (V = 0) ou (V = 3)
+           fimse
+        fimse
+      ate (V = 1) ou (V = 3)
+      se (V = 1) entao
+         repita
+           escreval("Digite o montante: ")
+           leia(montante)
+           ERRO(montante, V)
+         ate (V = 1)
+         repita
+           escreval("Digite o valor: ")
+           leia(Novo_valor)
+           ERROZ(Novo_valor, V)
+         ate (V = 1)
+         se (V = 1) entao
+           preco_produto[Choice] <- Novo_valor
+           Quantidade_produtos[Choice] <- Quantidade_produtos[Choice] + montante
+         fimse
+      fimse
+         Verif_f <- 1
+    fimse
+    // ----- CADASTRO DOS PRODUTOS -----
+    se (Verif_estrtu_seguint = 1) e (Resp = 5) entao
+      limpatela
+      repita
+        escreval("-------------------------")
+        escreval("|      CADASTRAR:       |")
+        escreval("-------------------------")
+        escreval("Quantos serão cadastrados? ")
+          leia(quant_cadastro)
+        Valida_lista(quant_cadastro, V)
+        Ve <- 0
+        se (V = 1) entao
+           C <- 1
+           repita
+             se (nome_produto[C] = "") entao
+                Ve <- Ve + 1
+                se (Ve = quant_cadastro) entao
+                   C <- 20
+                fimse
+             fimse
+             C <- C + 1
+           ate (C > 20)
+           se (Ve >= 1) e (Ve < quant_cadastro) entao
+             escreval("Não há espaço suficiente para armazenar todos os produtos.")
+             escreval("Serão cadastrados, apenas, ", Ve, " produtos.")
+             V <- 1
+           senao
+                se (Ve = 0) entao
+                   escreval("Não há espaço para armazenar novos produtos.")
+                   escreval("Tente novamente após o estoque ser reduzido.")
+                   V <- 0
+                fimse
+           fimse
+        fimse
+        D <- 1
+        se (V = 1) entao
+          para C de 1 ate Ve faca
+            limpatela
+            escreval("Produto N° ", C)
+            repita
+               escreval("Digite o nome do produto: ")
+                 leia(nome_prod)
+               se (nome_prod <> "") entao
+                 Z <- 1
+               senao
+                 escreval("ERRO! NOME NULO INSERIDO.")
+                 escreval("")
+                 Z <- 0
+               fimse
+            ate(Z = 1)
+            repita
+              se (nome_produto[D] = "") entao
+                nome_produto[D] <- nome_prod
+                Temp <- D                         // Variável temporária recebe a "posição" de D para usar como posição equivalente ao preço na estrutura seguinte
+                D <- 20                           // D recebe 20 para fechar o loop caso o espaço esteja vazio e não acabe com a estrutura inserindo o nome em todos os espaços vazios.
+              fimse
+              D <- D + 1
+            ate(D > 20)
+            D <- 1
+            repita
+              escreval("Digite a quantidade, em unidades, do produto: ")
+              leia(Quantidade)
+              ERRO(Quantidade, V)
+              se (V = 1) entao
+                Quantidade_produtos[Temp] <- Quantidade
+              fimse
+            ate (V = 1)
+            repita
+              escreval("Qual a quantidade de unidades por pacote? ")
+              escreval("1 - Fardo[30 uni]")
+              escreval("2 - Pacote[12 uni]")
+              escreval("3 - Caixa[20 uni]")
+              leia(Tipo_Pac)
+              ERRO(Tipo_Pac, V)
+              escolha Tipo_Pac
+                caso 1
+                  Fardo[Temp] <- Quantidade_produtos[Temp] \ 30
+                  Tipo_Fard[Temp] <- 30
+                caso 2
+                  Fardo[Temp] <- Quantidade_produtos[Temp] \ 12
+                  Tipo_Fard[Temp] <- 12
+                caso 3
+                  Fardo[Temp] <- Quantidade_produtos[Temp] \ 20
+                  Tipo_Fard[Temp] <- 20
+                outrocaso
+                  V <- 0
+              fimescolha
+            ate (V = 1)
+            repita
+              escreval("Digite o preço: ")
+              leia(preco_prod)
+              ERROZ(preco_prod, V)
+              se (V = 1) entao
+                preco_produto[Temp] <- preco_prod + (preco_prod * 0.2 + preco_prod * 0.05 + preco_prod * 0.2)
+              fimse
+            ate (V = 1)
+          fimpara
+        fimse
+      ate (V = 1)
+      Verif_f <- 1
+    fimse
+    // PERGUNTA DE FINALIZAÇÃO OU REPETIÇÃO QUE LEVA DE VOLTA A MENÚ
+    se (Verif_f = 1) entao
+      Mensagem(Verif_estrut, V)
+    fimse
+  ate (V = 1)
+Fimalgoritmo
