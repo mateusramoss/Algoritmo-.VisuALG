@@ -1,0 +1,131 @@
+Algoritmo "semnome"
+
+var
+  M: vetor[1..4, 1..4] de inteiro
+  C, L, V, T, Resp, V_V, R, Cont, TR, Con, H, S: inteiro
+inicio
+  para L de 1 ate 4 faca
+    para C de 1 ate 4 faca
+      leia(M[L, C])
+    fimpara
+  fimpara
+  repita
+     // ------------------- MENÚ -------------------------
+     repita
+       escreval("---------------------")
+       escreval("1 - Mostrar Matriz")
+       escreval("2 - Diagona principal")
+       escreval("3 - Triângulo superior")
+       escreval("4 - Triângulo inferior")
+       escreval("5 - Encerrar")
+       escreval("----------------------")
+         leia(Resp)
+       se (Resp >= 1) e (Resp <= 4) entao
+         V <- 1
+       senao
+         se (Resp = 5) entao
+           V <- 0
+         senao
+           V <- 2
+           escreva("ERRO. VALOR INVÁLIDO.")
+         fimse
+       fimse
+     ate (V = 1) ou (V = 0)
+     //------------------ FIM MENÚ ----------------------
+
+     //---------------- MATRIZ COMPLETA -----------------
+     se (Resp = 1) e (V = 1) entao
+       limpatela
+       para L de 1 ate 4 faca
+         para C de 1 ate 4 faca
+           escreva("{", M[L, C], "}":2)
+         fimpara
+           escreval()
+       fimpara
+     fimse
+     //----------------- FIM MATRIZ --------------------
+
+     //--------------- DIAGONAL PRINCIPAL --------------
+     se (Resp = 2) e (V = 1) entao
+       limpatela
+       para L de 1 ate 4 faca
+         para C de 1 ate 4 faca
+           se (L = C) entao
+             escreva(M[L,C])
+           senao
+             escreva("  ")
+           fimse
+         fimpara
+         escreval()
+       fimpara
+     fimse
+     //------------- FIM DIAGONAL PRINCIPAL ------------
+
+     //--------------- TRIÂNGULO SUPERIOR --------------
+     se (Resp = 3) e (V = 1) entao
+       limpatela
+       C <- 2
+       T <- 2
+       V_V <- 1
+       para L de 1 ate 3 faca
+          para R de 1 ate V_V faca
+              escreva("    ")
+          fimpara
+          enquanto (C <= 4) faca
+             escreva("  ",M[L,C])
+            C <- C + 1
+          fimenquanto
+          T <- T + 1
+          C <- T
+          V_V <- V_V + 1
+          escreval()
+       fimpara
+     fimse
+     //----------- FIM TRIÂNGULO SUPERIOR -----------
+
+    // ----------- TRIÂNGULO INFERIOR -------------------
+     se (Resp = 4) e (V = 1) entao
+       limpatela
+       C <- 0  // zerar o C porque no contador para ler os valores das posições, o C e o L terminam com 4.
+       L <- 0
+       Con <- 1
+       S <- 4
+       Cont <- 4
+       TR <- 1
+       repita
+          se (C > 0) e (C <= 4) entao
+            H <- H + 1
+            repita
+              escreva(M[L,C], "  ")
+              C <- C + 1
+              Con <- Con + 1
+            ate (Con > H)
+               Con <- 1
+               C <- 1
+          fimse
+
+          repita
+            escreva("   ")
+            Cont <- Cont - 1
+          ate (Cont < 1)
+          escreval
+          se (C = 0) entao
+            C <- 1
+            L <- 1
+          fimse
+          TR <- TR + 1
+          Cont <- S - 1
+          S <- Cont
+          L <- L + 1
+       ate (TR > 4)
+     fimse
+     C <- 0
+     L <- 0
+     Con <- 1
+     S <- 4
+     Cont <- 4
+     TR <- 1
+     H <- 0
+    //-------------------------- FIM TRIÂNGULO INFERIOR ---------------------------
+     // Reiniciar as variáveis, caso o usuário digite novamente o triângulo inferior
+  ate (V = 0)
