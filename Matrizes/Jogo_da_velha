@@ -1,0 +1,149 @@
+//Quebrei a cabeça criando um esboço de como seria feito o algoritmo completo. Quebrei o problema em pedaços menores e fui indo. O que me deu mais trabalho, no início, 
+//foi comparar as diagonais, estava tentando encontrar uma propriedade em comum às posições, pensei em número primos, mas havia posições que tinham valores primos, mas não eram da diagonal
+//principal ou do reflexo dela. Acabei percebendo que, começando da coluna 1 linha 3, ao subir, a linha diminui em um e a coluna aumenta em 1. Em seguida desbanquei e resolvi. 
+//Acabei esquecendo de por um verificador ao final do programa para perguntar se o usuário quer continuar jogando ou finalizar, para que não seja necessário estar sempre apertando F9.
+
+algoritmo
+var
+  jogo: vetor [1..3, 1..3] de caracter
+  Vit, C, L, Val: inteiro
+  Resp_posi, Trust, Cont_posi, Empat, Retorno, Tri_igual: inteiro
+  Conver_resp_posi, Simbolo: caracter
+inicio
+  // ATRIBUIÇÃO DE VALORES ÀS POSIÇÕES DA MATRIZ
+  para L de 1 ate 3 faca
+    para C de 1 ate 3 faca
+      Val <- Val + 1
+      jogo[L,C] <- Numpcarac(Val) //MUDA O VALOR DE INTEIRO PARA CARÁCTER, NÃO ALTERA O TIPO DA ARIÁVEL, APENAS SEU VALOR
+    fimpara
+  fimpara
+  Cont_posi <- 1
+  repita
+    // MOSTRA A MATRIZ COMPLETA A CADA ESCOLHA DO LOCAL DE ONDE POR O SÍMBOLO
+    limpatela
+    para L de 1 ate 3 faca
+      escreval(" |----------|")
+      para C de 1 ate 3 faca
+        escreva(" | ", jogo[L,C])
+      fimpara
+      escreval("|")
+    fimpara
+    escrevaL(" |----------|")
+    escreval()
+    // DEFINIÇÃO DE QUAL SÍMBOLO SERÁ MOSTRADO, PARA QUE O USUÁRIO ESCOLHA SUA POSIÇÃO
+    se (Cont_posi mod 2 = 0) entao
+      Simbolo <- "O"
+    senao
+      Simbolo <- "X"
+    fimse
+    repita
+      repita
+        escreval("Onde quer colocar o {", Simbolo, "} ?")
+        leia(Resp_posi)
+        se (Resp_posi >= 1) e (Resp_posi <= 9) entao //VERIFICA SE O VALOR DIGITADO PELO USUÁRIO ESTÁ DENTRO DO PERÍMETRO DAS POSIÇÕES.
+          Trust <- 1
+          Conver_resp_posi <- Numpcarac(Resp_posi)
+        senao
+          Trust <- 0
+          escreval("ERRO! POSIÇÃO INEXISTENTE. TENTE NOVAMENTE.")
+        fimse
+      ate (Trust = 1)
+      L <- 1
+      repita // VERIFICA SE A POSIÇÃO ESCOLHIDA ESTÁ OCUPADA POR ALGUM SÍMBOLO ALÉM DO CARÁCTER NUMÉRICO.
+        C <- 1
+        repita
+          se (jogo[L,C] = Conver_resp_posi) entao
+            jogo[L,C] <- Simbolo  //CASO SEJA, POR EX.: USUÁRIO = 1, POSIÇÃO 1X1 = 1, POSIÇÃO 1X1 RECEBE SIMBOLO(O ou X)
+            Retorno <- 1
+            L <- 4
+            C <- 4
+          senao
+            Retorno <- 0
+          fimse
+          C <- C + 1
+        ate (C > 3)
+        L <- L + 1
+      ate (L > 3)
+      se (Retorno = 0) entao // A SITUAÇÃO É VERIFICADA AO FIM DO LOOP PARA QUE, COMO HÁ, REALMENTE, VALORES NAS POSIÇÕES E QUE SÃO DIFERENTES DO ESCOLHIDO PELO USUÁRIO, NÃO ACABE RETORNANDO SEMPRE UMA MENSAGEM DE ERRO.
+        escreval("POSIÇÃO JÁ OCUPADA")
+      fimse
+    ate (Retorno = 1)
+    // SÃO FEITAS QUATRO TIPOS DE VERIFICAÇÃO PARA O CASO DE TER TRÊS "CASAS" IGUAIS
+    // HORIZONTAIS, VERTICAIS E DIAGONAIS. CASO AS TRÊS SEJAM IGUAIS, RETORNAM AO VERIFICADOR O VALOR 1 E O SÍMBOLO VENCEDOR PARA SER MOSTRADO AO USUÁRIO QUEM GANHOU.
+    se (Tri_igual = 0) entao
+      C <- 0
+      L <- 1
+      repita
+        C <- 1
+        se (jogo[L, C] = jogo[L, C + 1]) e (jogo[L, C + 1] = jogo[L, C + 2]) entao
+          Tri_igual <- 1
+          Simbolo <- jogo[L,C]
+          Vit <- 1
+          L <- 4
+          Empat <- 1
+        fimse
+        L <- L + 1
+      ate (L > 3)
+    fimse
+    se (Tri_igual = 0) entao
+      C <- 1
+      L <- 0
+      repita
+        l <- 1
+        se (jogo[L,C] = jogo[L+1, C]) e (jogo[L+1, C] = jogo[L + 2, C]) entao
+          Tri_igual <- 1
+          Simbolo <- jogo[L,C]
+          Vit <- 1
+          C <- 4
+          Empat <- 1
+        fimse
+        C <- C + 1
+      ate (C > 3)
+    fimse
+    se (Tri_igual = 0) entao
+      L <- 3
+      C <- 3
+      se (jogo[L,C] = jogo[L-1,C-1]) e (jogo[L-1,C-1] = jogo[L-2,C-2]) entao
+        Tri_igual <- 1
+        Simbolo <- jogo[L,C]
+        Vit <- 1
+        Empat <- 1
+      fimse
+    fimse
+    se (Tri_igual = 0) entao
+      L <- 3
+      C <- 1
+      se (jogo[L,C] = jogo[L-1,C+1]) e (jogo[L-1,C+1] = jogo[L-2,C+2]) entao
+        Tri_igual <- 1
+        Vit <- 1
+        Simbolo <- jogo[L,C]
+        Empat <- 1
+      fimse
+    fimse
+
+    Cont_posi <- Cont_posi + 1 // CONTADOR DE QUANTAS RODADAS JÁ FORAM FEITAS. VAI ATÉ NOVE.
+    // CASO NINGUÉM VENÇA, AO CHEGAR EM 9, O LOOP FECHA E MOSTRA MENSAGEM DE EMPATE
+    se (Cont_posi > 9) e (Tri_igual = 0) entao //SE CONT_POSI = 9 E OUTRO VERIFICADOR QUE COMPARA TRÊS CASAS SEJA = 0, ENTAO ENTRE NA ESTRUTURA, SENÃO, VITÓRIA
+      Vit <- 1
+      Empat <- 0
+    fimse
+  ate (Vit = 1)
+
+  // VERIFICAR SE HOUVE EMPATE OU VITÓRIA
+  se (Vit = 1) e (Empat = 1) entao
+    limpatela
+    escreval()
+    para L de 1 ate 3 faca
+      escreval(" |----------|")
+      para C de 1 ate 3 faca
+        escreva(" | ", jogo[L,C])
+      fimpara
+      escreval("|")
+    fimpara
+    escreval(" |----------|")
+    escreval("VITÓRIA PARA O JOGADOR DO {", Simbolo, "}")
+  fimse
+  se (Vit = 1) e (Empat = 0) entao
+    escreval("EMPATE.")
+  fimse
+fimalgoritmo
